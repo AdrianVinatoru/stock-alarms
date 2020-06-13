@@ -5,21 +5,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class StockAlarm {
+public class Alarm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ElementCollection(targetClass = String.class)
-    private Set<String> symbols;
+    private String symbol;
+
+    public Alarm(User user, String symbol) {
+        this.user = user;
+        this.symbol = symbol;
+    }
 }

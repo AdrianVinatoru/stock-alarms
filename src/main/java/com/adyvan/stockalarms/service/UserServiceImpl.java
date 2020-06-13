@@ -4,6 +4,7 @@ import com.adyvan.stockalarms.model.Role;
 import com.adyvan.stockalarms.model.User;
 import com.adyvan.stockalarms.dto.UserRegistrationDto;
 import com.adyvan.stockalarms.repository.UserRepository;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +38,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        user.setAlarms(new HashSet<>());
         return userRepository.save(user);
     }
 
