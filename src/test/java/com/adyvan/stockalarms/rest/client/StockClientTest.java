@@ -3,7 +3,7 @@ package com.adyvan.stockalarms.rest.client;
 import com.adyvan.stockalarms.dto.StockDto;
 import com.adyvan.stockalarms.model.Alarm;
 import com.adyvan.stockalarms.rest.StockClient;
-import com.adyvan.stockalarms.service.AlarmService;
+import com.adyvan.stockalarms.service.AlarmServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +17,7 @@ public class StockClientTest {
     private StockClient stockClient;
 
     @Autowired
-    private AlarmService alarmService;
+    private AlarmServiceImpl alarmService;
 
     @Test
     public void getStockBySymbol() {
@@ -30,6 +30,6 @@ public class StockClientTest {
     public void addAlarmForSymbol(){
         String symbol = "IBM";
 
-        Alarm alarm = alarmService.addStockToWatchlist(symbol);
+        alarmService.addAlarmForSymbol(symbol);
     }
 }

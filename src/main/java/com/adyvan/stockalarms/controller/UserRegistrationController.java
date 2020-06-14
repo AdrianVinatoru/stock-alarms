@@ -1,4 +1,4 @@
-package com.adyvan.stockalarms.web;
+package com.adyvan.stockalarms.controller;
 
 import com.adyvan.stockalarms.dto.UserRegistrationDto;
 import com.adyvan.stockalarms.model.User;
@@ -37,7 +37,7 @@ public class UserRegistrationController {
 
         User existing = userService.findByEmail(userDto.getEmail());
         if (existing != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email");
+            result.rejectValue("email", null, "This email is already registered!");
         }
 
         if (result.hasErrors()) {

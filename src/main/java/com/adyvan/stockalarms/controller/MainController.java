@@ -1,4 +1,4 @@
-package com.adyvan.stockalarms.web;
+package com.adyvan.stockalarms.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,6 @@ public class MainController {
     public String login(Model model) {
         return "login";
     }
-
     @GetMapping("/user")
     public String userIndex() {
         return "user/index";
