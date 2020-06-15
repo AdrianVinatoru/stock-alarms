@@ -2,6 +2,7 @@ package com.adyvan.stockalarms.controller;
 
 import com.adyvan.stockalarms.model.Alarm;
 import com.adyvan.stockalarms.service.AlarmServiceImpl;
+import com.adyvan.stockalarms.types.AlarmRequest;
 import com.adyvan.stockalarms.types.GenericResponse;
 import lombok.AllArgsConstructor;
 import org.apache.commons.httpclient.HttpStatus;
@@ -30,10 +31,17 @@ public class AlarmController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{symbol}")
-    public void addAlarmForSymbol2(@PathVariable String symbol) {
-        int threshold = 10;
+    @PostMapping
+    public ResponseEntity<GenericResponse> addAlarm(@RequestBody AlarmRequest alarmRequest) {
+        Alarm alarm = alarmService.addAlarm(alarmRequest);
 
-        alarmService.addAlarmForSymbol(symbol, threshold);
+        GenericResponse response = GenericResponse.builder()
+                .result(alarm)
+                .httpCode(HttpStatus.SC_OK)
+                .httpMessage(HttpStatus.getStatusText(HttpStatus.SC_OK))
+                .build();
+
+        return ResponseEntity.ok(response);
     }
+
 }

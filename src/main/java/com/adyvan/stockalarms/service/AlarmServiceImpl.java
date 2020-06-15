@@ -5,6 +5,7 @@ import com.adyvan.stockalarms.model.Alarm;
 import com.adyvan.stockalarms.model.User;
 import com.adyvan.stockalarms.repository.AlarmRepository;
 import com.adyvan.stockalarms.repository.UserRepository;
+import com.adyvan.stockalarms.types.AlarmRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,19 +31,23 @@ public class AlarmServiceImpl implements AlarmService {
         return alarmRepository.findByUser(user);
     }
 
-    public void addAlarmForSymbol(String symbol, int threshold) {
+    @Override
+    public Alarm addAlarm(AlarmRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userRepository.findByEmail(currentPrincipalName);
 
         Set<Alarm> alarms = alarmRepository.findByUser(user).stream()
-                .filter(alarm -> alarm.getSymbol().equalsIgnoreCase(symbol))
+                .filter(alarm -> alarm.getSymbol().equalsIgnoreCase(request.getSymbol()))
                 .collect(Collectors.toSet());
 
+        Alarm alarm = new Alarm(user, request.getSymbol(), request.getThreshold());
         if (alarms.isEmpty()) {
-            alarms.add(new Alarm(user, symbol, threshold));
+            alarms.add(alarm);
             user.setAlarms(alarms);
             userRepository.save(user);
         } else throw new StockAlarmException("Alarm for this symbol already exists!");
+
+        return alarm;
     }
 }
