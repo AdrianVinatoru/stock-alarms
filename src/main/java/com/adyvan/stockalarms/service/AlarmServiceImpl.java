@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ public class AlarmServiceImpl implements AlarmService {
     private AlarmRepository alarmRepository;
 
     private UserRepository userRepository;
+
+    private StockService stockService;
 
     @Override
     public Set<Alarm> getAllAlarmsForCurrentUser() {
@@ -41,7 +44,8 @@ public class AlarmServiceImpl implements AlarmService {
                 .filter(alarm -> alarm.getSymbol().equalsIgnoreCase(request.getSymbol()))
                 .collect(Collectors.toSet());
 
-        Alarm alarm = new Alarm(user, request.getSymbol(), request.getThreshold());
+        BigDecimal currentPrice = stockService.retrievePriceFromStock(request.getSymbol());
+        Alarm alarm = new Alarm(user, request.getSymbol(), request.getThreshold(), currentPrice);
         if (alarms.isEmpty()) {
             alarms.add(alarm);
             user.setAlarms(alarms);

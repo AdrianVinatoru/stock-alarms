@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -28,9 +30,14 @@ public class Alarm {
 
     private int threshold;
 
-    public Alarm(User user, String symbol, int threshold) {
+    @Digits(integer=5, fraction=2)
+    @Column(name = "current_open_value")
+    private BigDecimal currentPrice;
+
+    public Alarm(User user, String symbol, int threshold, BigDecimal currentPrice) {
         this.user = user;
         this.symbol = symbol;
         this.threshold = threshold;
+        this.currentPrice = currentPrice;
     }
 }
