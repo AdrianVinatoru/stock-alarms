@@ -8,5 +8,5 @@ public interface AlarmService {
 
     Set<Alarm> getAllAlarmsForCurrentUser();
 
-    void addAlarmForSymbol(String symbol);
+    void addAlarmForSymbol(String symbol, int threshold);
 }

@@ -1,10 +1,9 @@
 package com.adyvan.stockalarms.service;
 
+import com.adyvan.stockalarms.dto.UserRegistrationDto;
 import com.adyvan.stockalarms.model.Role;
 import com.adyvan.stockalarms.model.User;
-import com.adyvan.stockalarms.dto.UserRegistrationDto;
 import com.adyvan.stockalarms.repository.UserRepository;
-import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

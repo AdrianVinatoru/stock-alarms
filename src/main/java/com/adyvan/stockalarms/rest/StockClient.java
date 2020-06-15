@@ -32,9 +32,10 @@ public class StockClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<?> request = new HttpEntity<>(headers);
 
+        alpha_url = this.alpha_url + symbol + alpha_interval + apikey;
+
         ResponseEntity<StockDto> responseEntity = restTemplate.exchange(
-                createURL(symbol), HttpMethod.GET,
-                request, StockDto.class
+                alpha_url, HttpMethod.GET, request, StockDto.class
         );
 
         if (responseEntity.getStatusCode().value() != 200) {
@@ -44,17 +45,4 @@ public class StockClient {
             return responseEntity.getBody();
         }
     }
-
-    private String createURL(String symbol) {
-        log.debug("Base URL  : " + alpha_url);
-
-        String alpha_url = this.alpha_url;
-        alpha_url += symbol;
-        alpha_url += alpha_interval;
-        alpha_url += apikey;
-
-        log.debug("Complete URL  : " + alpha_url);
-        return alpha_url;
-    }
-
 }

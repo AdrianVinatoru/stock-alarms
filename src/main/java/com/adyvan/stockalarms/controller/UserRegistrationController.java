@@ -3,7 +3,7 @@ package com.adyvan.stockalarms.controller;
 import com.adyvan.stockalarms.dto.UserRegistrationDto;
 import com.adyvan.stockalarms.model.User;
 import com.adyvan.stockalarms.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,9 +16,9 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/registration")
+@AllArgsConstructor
 public class UserRegistrationController {
 
-    @Autowired
     private UserService userService;
 
     @ModelAttribute("user")

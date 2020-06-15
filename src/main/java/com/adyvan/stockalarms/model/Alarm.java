@@ -1,6 +1,7 @@
 package com.adyvan.stockalarms.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Alarm {
 
     @Id
@@ -24,8 +26,11 @@ public class Alarm {
 
     private String symbol;
 
-    public Alarm(User user, String symbol) {
+    private int threshold;
+
+    public Alarm(User user, String symbol, int threshold) {
         this.user = user;
         this.symbol = symbol;
+        this.threshold = threshold;
     }
 }

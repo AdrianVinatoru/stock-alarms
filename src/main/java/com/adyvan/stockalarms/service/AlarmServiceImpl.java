@@ -1,10 +1,11 @@
 package com.adyvan.stockalarms.service;
 
+import com.adyvan.stockalarms.exceptions.StockAlarmException;
 import com.adyvan.stockalarms.model.Alarm;
 import com.adyvan.stockalarms.model.User;
 import com.adyvan.stockalarms.repository.AlarmRepository;
 import com.adyvan.stockalarms.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class AlarmServiceImpl implements AlarmService {
 
-    @Autowired
     private AlarmRepository alarmRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
     @Override
@@ -30,7 +30,7 @@ public class AlarmServiceImpl implements AlarmService {
         return alarmRepository.findByUser(user);
     }
 
-    public void addAlarmForSymbol(String symbol) {
+    public void addAlarmForSymbol(String symbol, int threshold) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userRepository.findByEmail(currentPrincipalName);
@@ -40,9 +40,9 @@ public class AlarmServiceImpl implements AlarmService {
                 .collect(Collectors.toSet());
 
         if (alarms.isEmpty()) {
-            alarms.add(new Alarm(user, symbol));
+            alarms.add(new Alarm(user, symbol, threshold));
             user.setAlarms(alarms);
             userRepository.save(user);
-        } else throw new  RuntimeException("Alarm for this symbol already exists!");
+        } else throw new StockAlarmException("Alarm for this symbol already exists!");
     }
 }

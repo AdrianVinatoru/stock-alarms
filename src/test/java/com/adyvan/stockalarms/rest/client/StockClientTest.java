@@ -1,7 +1,6 @@
 package com.adyvan.stockalarms.rest.client;
 
 import com.adyvan.stockalarms.dto.StockDto;
-import com.adyvan.stockalarms.model.Alarm;
 import com.adyvan.stockalarms.rest.StockClient;
 import com.adyvan.stockalarms.service.AlarmServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -27,9 +26,10 @@ public class StockClientTest {
     }
 
     @Test
-    public void addAlarmForSymbol(){
+    public void addAlarmForSymbol() {
         String symbol = "IBM";
+        int threshold = 10;
 
-        alarmService.addAlarmForSymbol(symbol);
+        alarmService.addAlarmForSymbol(symbol, threshold);
     }
 }
