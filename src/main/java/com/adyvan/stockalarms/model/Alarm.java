@@ -32,12 +32,12 @@ public class Alarm {
 
     @Digits(integer=5, fraction=2)
     @Column(name = "current_open_value")
-    private BigDecimal currentPrice;
+    private BigDecimal initialPrice;
 
-    public Alarm(User user, String symbol, int threshold, BigDecimal currentPrice) {
+    public Alarm(User user, String symbol, int threshold, BigDecimal initialPrice) {
         this.user = user;
         this.symbol = symbol;
         this.threshold = threshold;
-        this.currentPrice = currentPrice;
+        this.initialPrice = initialPrice;
     }
 }

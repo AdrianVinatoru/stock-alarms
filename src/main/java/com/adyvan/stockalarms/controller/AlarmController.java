@@ -1,7 +1,7 @@
 package com.adyvan.stockalarms.controller;
 
 import com.adyvan.stockalarms.model.Alarm;
-import com.adyvan.stockalarms.service.AlarmServiceImpl;
+import com.adyvan.stockalarms.service.impl.AlarmServiceImpl;
 import com.adyvan.stockalarms.types.AlarmRequest;
 import com.adyvan.stockalarms.types.GenericResponse;
 import lombok.AllArgsConstructor;

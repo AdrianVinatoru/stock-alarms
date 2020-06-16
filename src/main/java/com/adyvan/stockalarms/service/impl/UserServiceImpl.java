@@ -1,9 +1,10 @@
-package com.adyvan.stockalarms.service;
+package com.adyvan.stockalarms.service.impl;
 
 import com.adyvan.stockalarms.dto.UserRegistrationDto;
 import com.adyvan.stockalarms.model.Role;
 import com.adyvan.stockalarms.model.User;
 import com.adyvan.stockalarms.repository.UserRepository;
+import com.adyvan.stockalarms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +30,10 @@ public class UserServiceImpl implements UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
     }
 
     public User save(UserRegistrationDto registration) {

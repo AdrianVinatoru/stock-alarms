@@ -1,10 +1,11 @@
-package com.adyvan.stockalarms.service;
+package com.adyvan.stockalarms.service.impl;
 
 import com.adyvan.stockalarms.exceptions.StockAlarmException;
 import com.adyvan.stockalarms.model.Alarm;
 import com.adyvan.stockalarms.model.User;
 import com.adyvan.stockalarms.repository.AlarmRepository;
 import com.adyvan.stockalarms.repository.UserRepository;
+import com.adyvan.stockalarms.service.AlarmService;
 import com.adyvan.stockalarms.types.AlarmRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -23,7 +24,7 @@ public class AlarmServiceImpl implements AlarmService {
 
     private UserRepository userRepository;
 
-    private StockService stockService;
+    private StockServiceImpl stockService;
 
     @Override
     public Set<Alarm> getAllAlarmsForCurrentUser() {

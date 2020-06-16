@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Component
 @Slf4j
-public class StockClient {
+public class StockRestClient {
     @Value("${alpha.stock.alpha_url}")
     private String alpha_url;
 
@@ -23,7 +23,7 @@ public class StockClient {
 
     private final RestTemplate restTemplate;
 
-    public StockClient(RestTemplateBuilder restTemplateBuilder) {
+    public StockRestClient(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
