@@ -55,4 +55,9 @@ public class AlarmServiceImpl implements AlarmService {
 
         return alarm;
     }
+
+    @Override
+    public Alarm saveAlarm(Alarm alarm) {
+        return alarmRepository.save(alarm);
+    }
 }

@@ -22,7 +22,7 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Alarm> alarms;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

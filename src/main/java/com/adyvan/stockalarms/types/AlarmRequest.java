@@ -11,6 +11,6 @@ public class AlarmRequest {
 
     private String symbol;
 
-    private int threshold;
+    private float threshold;
 
 }

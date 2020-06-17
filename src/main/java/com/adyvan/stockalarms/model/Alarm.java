@@ -28,13 +28,14 @@ public class Alarm {
 
     private String symbol;
 
-    private int threshold;
+    private float threshold;
 
     @Digits(integer=5, fraction=2)
     @Column(name = "current_open_value")
     private BigDecimal initialPrice;
 
-    public Alarm(User user, String symbol, int threshold, BigDecimal initialPrice) {
+
+    public Alarm(User user, String symbol, float threshold, BigDecimal initialPrice) {
         this.user = user;
         this.symbol = symbol;
         this.threshold = threshold;

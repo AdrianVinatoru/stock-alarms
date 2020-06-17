@@ -10,4 +10,6 @@ public interface AlarmService {
     Set<Alarm> getAllAlarmsForCurrentUser();
 
     Alarm addAlarm(AlarmRequest request);
+
+    Alarm saveAlarm(Alarm alarm);
 }
